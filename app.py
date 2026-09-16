@@ -8,6 +8,15 @@ import warnings
 import json
 from pathlib import Path
 
+import sys
+import sklearn.compose._column_transformer as ct
+
+# Parche temporal de compatibilidad para evitar el error de _RemainderColsList
+if not hasattr(ct, "_RemainderColsList"):
+    class _RemainderColsList(list):
+        pass
+    ct._RemainderColsList = _RemainderColsList
+
 warnings.filterwarnings("ignore")
 
 st.set_page_config(
